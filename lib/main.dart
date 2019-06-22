@@ -5,16 +5,79 @@ import 'package:holding_gesture/holding_gesture.dart';
 
 // Try to don't use lambda function.
 // Best practices: use lambda function.
-void main() {
-  // instantiation new MyApp() equal to MyApp()
-  return runApp(new MyApp());
+//void main() {
+//  // instantiation new MyApp() equal to MyApp()
+//  return runApp(new MyApp());
+//}
+
+class Page2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: "Page 2",
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Page 2"),
+        ),
+      ),
+    );
+  }
 }
+
+void main() {
+  runApp(MaterialApp(
+    title: 'Navigation Basics',
+    home: MyApp(),
+  ));
+}
+
+class FirstRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('First Route'),
+      ),
+      body: Center(
+        child: RaisedButton(
+          child: Text('Open route'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Page2()),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+      return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -28,27 +91,37 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-        home: MyHomePage(title: 'Flutter-HelloWorld'),
+      // either this one ; or
+      // home: MyHomePage(title: 'Flutter-HelloWorld'),
 
-        /*
-        home : Scaffold(
-          appBar: AppBar(
-            // Here we take the value from the MyHomePage object that was created by
-            // the App.build method, and use it to set our appbar title.
-            title: Text("MyApp"),
-          ),
-          body: Center(
-            child: Column(
-              children: <Widget>[
-                FlutterLogo(size: 128),
-                Icon(Icons.train, size: 128),
-                Text("HelloWorld"),
-                Text("How are you?")
-              ],
-            )
+      // this one
+      home : Scaffold(
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text("MyApp"),
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              FlutterLogo(size: 128),
+              Icon(Icons.train, size: 128),
+              Text("HelloWorld",   style: TextStyle(fontSize: 28)),
+              Text("How are you?"),
+              Image.asset('asset/myImage.png',height: 256, width: 256),
+              RaisedButton(
+                child: Text("Next"),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Page2()),
+                  );
+                },
+              ),
+            ],
           )
-        )*/
-
+        )
+      )
     );
   }
 }
