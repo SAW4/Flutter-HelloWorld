@@ -10,6 +10,14 @@ import 'package:holding_gesture/holding_gesture.dart';
 //  return runApp(new MyApp());
 //}
 
+void main() {
+  runApp(MaterialApp(
+    title: 'Navigation Basics',
+    home: MyApp(),
+  ));
+}
+
+
 class Page2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,59 +27,18 @@ class Page2 extends StatelessWidget {
         appBar: AppBar(
           title: Text("Page 2"),
         ),
+        body: Center(
+          child: RaisedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('Back'),
+            )
+        )
       ),
     );
   }
 }
-
-void main() {
-  runApp(MaterialApp(
-    title: 'Navigation Basics',
-    home: MyApp(),
-  ));
-}
-
-class FirstRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('First Route'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          child: Text('Open route'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Page2()),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class SecondRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
-        ),
-      ),
-    );
-  }
-}
-
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -92,9 +59,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       // either this one ; or
-      // home: MyHomePage(title: 'Flutter-HelloWorld'),
+      home: MyHomePage(title: 'Flutter-HelloWorld'),
 
       // this one
+      /*
       home : Scaffold(
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
@@ -121,7 +89,7 @@ class MyApp extends StatelessWidget {
             ],
           )
         )
-      )
+      )*/
     );
   }
 }
@@ -192,13 +160,22 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset('asset/myImage.png',height: 256, width: 256),
+            Image.asset('assets/myImage.png',height: 256, width: 256),
             Text(
               'You have pushed the button this many times (｡+･`ω･´)',
             ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.display1,
+            ),
+            RaisedButton(
+              child: Text("Next"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Page2()),
+                );
+              },
             ),
           ],
         ),
